@@ -1,0 +1,24 @@
+{
+  "name": "templatebot",
+  "version": "2.0.0",
+  "description": "TemplateBot is a simple Discord bot template to help get started with bot development.",
+  "readme": "README.md",
+  "maintainers": [],
+  "author": "Thomas Baillie <thomasbaillie@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasShaped/TemplateBot"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "^10.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
