@@ -11,6 +11,14 @@ class Bot extends EventEmitter {
     this.client = new Discord.Client();
     this.bindEvents();
   }
+  
+  /**
+   * Bind event functions.
+   */
+  bindEvents() {
+    this.client.on('ready', this.onReady.bind(this));
+    this.client.on('message', this.onMessage.bind(this));
+  }
 
   /**
    * Login client to Discord.
@@ -28,22 +36,10 @@ class Bot extends EventEmitter {
   }
 
   /**
-   * Bind event functions.
-   */
-  bindEvents() {
-    this.client.on('ready', this.onReady.bind(this));
-    this.client.on('message', this.onMessage.bind(this));
-  }
-
-  /**
    * Bot is connected to Discord.
    */
   onReady() {
-    console.log(
-      'Connected to Discord as ' +
-      this.client.user.username + '#' + this.client.user.discriminator + ' ' +
-      '<@' + this.client.user.id + '>'
-    );
+    console.log(`Connected to Discord as ${this.client.user.username}#${this.client.user.discriminator} <@${this.client.user.id}>`);
   }
 
   /**
