@@ -8,7 +8,7 @@ TemplateBot is a simple Discord bot template to help get started with bot develo
 ## Running the bot
 In order to connect to Discord your bot will need an auth token. You can create one from the [Discord Developer Portal](https://discordapp.com/developers/applications/). Once you've created an application, head to the "Bot" tab and click "Copy" to copy your token.
 
-You'll need to assign this token as an environment variable called `AUTH_TOKEN` in order for your bot to connect to Discord. You can do this via 
+You'll need to assign this token as an environment variable called `AUTH_TOKEN` in order for your bot to connect to Discord. You can do this via a file called `.env`. See the `.env.example` file for an example of what this should look like
 
 ## Deployment
 This repository comes with an included GitHub Actions workflow to deploy this bot to an Azure Web App.
