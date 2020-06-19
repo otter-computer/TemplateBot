@@ -1,3 +1,4 @@
+const fs = require(`fs`);
 const EventEmitter = require('events');
 const Discord = require('discord.js');
 
@@ -9,6 +10,17 @@ class Bot extends EventEmitter {
   constructor() {
     super();
     this.client = new Discord.Client();
+
+    // Dynamically load commands from files
+    this.commands = new Discord.Collection();
+
+    fs.readdirSync(`./Commands`)
+      .filter(file => file.endsWith(`.js`))
+      .filter(file => file !== 'Command.js')
+      .map(file => require(`./Commands/${file}`))
+      .filter(cmd => cmd.name)
+      .forEach(cmd => this.commands.set(cmd.name.toLowerCase(), new cmd()), this);
+
     this.bindEvents();
   }
   
@@ -52,9 +64,19 @@ class Bot extends EventEmitter {
       return;
     }
 
-    if (Message.content === 'ping') {
-      Message.reply('pong 🏓');
-    }
+    // Ignore if message doesn't start with command character
+    if (!Message.content.startsWith(`!`)) return;
+
+    // Parse message, see if it matches command name or alias
+    const args = Message.content.slice(1).split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    const command = this.commands.get(commandName) || this.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+    // If no command found, ignore
+    if (!command) return;
+
+    // Execute command
+    command.execute(Message, args);
   }
 }
 
