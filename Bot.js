@@ -1,8 +1,7 @@
 const fs = require(`fs`);
-const EventEmitter = require('events');
-const Discord = require('discord.js');
+const Discord = require(`discord.js`);
 
-class Bot extends EventEmitter {
+class Bot  {
   /**
    * Initializes all modules, a Discord client, binds events.
    * @constructor
@@ -16,7 +15,7 @@ class Bot extends EventEmitter {
 
     fs.readdirSync(`./Commands`)
       .filter(file => file.endsWith(`.js`))
-      .filter(file => file !== 'Command.js')
+      .filter(file => file !== `Command.js`)
       .map(file => require(`./Commands/${file}`))
       .filter(cmd => cmd.name)
       .forEach(cmd => this.commands.set(cmd.name.toLowerCase(), new cmd()), this);
@@ -28,8 +27,8 @@ class Bot extends EventEmitter {
    * Bind event functions.
    */
   bindEvents() {
-    this.client.on('ready', this.onReady.bind(this));
-    this.client.on('message', this.onMessage.bind(this));
+    this.client.on(`ready`, this.onReady.bind(this));
+    this.client.on(`message`, this.onMessage.bind(this));
   }
 
   /**
@@ -43,7 +42,7 @@ class Bot extends EventEmitter {
    * Destroy Discord client.
    */
   destroy() {
-    console.log('Shutting down.');
+    console.log(`Shutting down.`);
     this.client.destroy();
   }
 
@@ -60,9 +59,7 @@ class Bot extends EventEmitter {
    */
   onMessage(Message) {
     // Ignore system, bot messages
-    if (Message.system || Message.author.bot) {
-      return;
-    }
+    if (Message.system || Message.author.bot) return;
 
     // Ignore if message doesn't start with command character
     if (!Message.content.startsWith(`!`)) return;
