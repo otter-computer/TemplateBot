@@ -12,7 +12,7 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "express": "^4.17.1"
-  }
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
