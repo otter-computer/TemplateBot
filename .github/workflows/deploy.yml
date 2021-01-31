@@ -11,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1.0.0
+    - uses: actions/checkout@v2
       name: Checkout repository
 
-    - uses: actions/setup-node@v1.1.2
-      name: Use Node.js 10.x
+    - uses: actions/setup-node@v2
       with:
-        version: 10.x
+        node-version: '12'
 
     - name: npm install, build, and test
       run: |
@@ -26,7 +25,7 @@ jobs:
         npm run test --if-present
 
     - name: 'Deploy to Azure'
-      uses: azure/webapps-deploy@v1
+      uses: azure/webapps-deploy@v2
       with: 
         app-name: TemplateBot
         publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
