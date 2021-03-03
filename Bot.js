@@ -7,7 +7,6 @@ class Bot  {
    * @constructor
    */
   constructor() {
-    super();
     this.client = new Discord.Client();
 
     // Dynamically load commands from files
